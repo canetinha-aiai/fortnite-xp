@@ -11,6 +11,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Head>
         <title>XP CALCULATOR - Fortnite Edition</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="google-site-verification"
+          content="WaSubUCGIosQFEwDh29bSZxYxkFU8IQK1u6ySkXGSJg"
+        />
       </Head>
       <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-mesh font-display dark selection:bg-primary selection:text-background-dark bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
         <div
