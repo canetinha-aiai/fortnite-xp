@@ -23,8 +23,8 @@ interface ShopEntry {
     title: string;
     artist: string;
     albumArt: string;
-    releaseYear: number;
-    bpm: number;
+    releaseYear?: number;
+    bpm?: number;
   }>;
   instruments?: Array<{
     id: string;

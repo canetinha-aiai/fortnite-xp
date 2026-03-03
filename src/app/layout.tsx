@@ -56,6 +56,9 @@ export const metadata: Metadata = {
     description:
       "Acompanhe e calcule sua progressão de níveis e passos no Passe de Batalha do Fortnite.",
   },
+  icons: {
+    icon: "/raio.png",
+  },
 };
 
 export default function RootLayout({

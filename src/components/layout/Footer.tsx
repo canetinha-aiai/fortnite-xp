@@ -16,17 +16,6 @@ export const Footer: React.FC<FooterProps> = ({ className = "" }) => {
             Fortnite XP
           </h2>
         </div>
-        <div className="flex flex-wrap justify-center gap-8 text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em]">
-          <a className="hover:text-primary transition-colors" href="#">
-            Política de Privacidade
-          </a>
-          <a className="hover:text-primary transition-colors" href="#">
-            Termos de Serviço
-          </a>
-          <a className="hover:text-primary transition-colors" href="#">
-            Contato
-          </a>
-        </div>
         <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
           Não afiliado à <span className="text-slate-300">Epic Games</span>
         </p>
