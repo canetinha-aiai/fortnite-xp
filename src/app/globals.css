@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  
+  --color-primary: #ffff00;
+  --color-background-light: #f8f8f5;
+  --color-background-dark: #0a0a1a;
+  --color-card-bg: #1a1a3a;
+  --color-accent-blue: #202060;
+  
+  /* Missing tokens extracted from UI usage */
+  --color-card-dark: #12122b;
+  --color-border-dark: #1e1e3e;
+  
+  --radius: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  --color-black: #000;
+  --color-white: #fff;
+  
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-900: #0f172a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@custom-variant dark (&:is(.dark *));
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: radial-gradient(circle at center, #1a1a4a 0%, #0a0a1a 100%);
+    @apply text-slate-900 dark:text-slate-100 min-h-screen selection:bg-primary selection:text-background-dark overflow-x-hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .bg-mesh {
+    /* Made it extremely subtle to match the deep dark design */
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(32, 32, 96, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(26, 26, 74, 0.05) 0px, transparent 50%);
+  }
+
+  .fortnite-glow {
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+  }
+  
+  .item-card-gradient {
+    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.4) 100%);
+  }
+
+  /* Custom Yellow Theme Scrollbar (Visible on hover) */
+  .theme-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  .theme-scrollbar:hover {
+    scrollbar-color: rgba(255, 255, 0, 0.4) transparent;
+  }
+  
+  /* Webkit custom scrollbar */
+  .theme-scrollbar::-webkit-scrollbar {
+    height: 4px; /* Fix height so layout doesn't jump */
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar-track {
+    background: transparent; 
+    border-radius: 10px;
+    transition: background 0.3s ease-in-out;
+  }
+  .theme-scrollbar:hover::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03); 
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent; 
+    border-radius: 10px;
+    transition: background 0.3s ease-in-out;
+  }
+  .theme-scrollbar:hover::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 0, 0.4); 
+  }
+  .theme-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 0, 1); 
+  }
 }
