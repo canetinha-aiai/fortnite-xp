@@ -328,8 +328,8 @@ export const ShopSection: React.FC = () => {
               ))}
             </div>
           </div>
-          <div className="absolute top-0 right-0 bottom-4 w-12 bg-gradient-to-l from-background-dark to-transparent pointer-events-none"></div>
-          <div className="absolute top-0 left-0 bottom-4 w-12 bg-gradient-to-r from-background-dark to-transparent pointer-events-none"></div>
+          <div className="absolute top-0 right-0 bottom-4 w-12 bg-linear-to-l from-background-dark to-transparent pointer-events-none"></div>
+          <div className="absolute top-0 left-0 bottom-4 w-12 bg-linear-to-r from-background-dark to-transparent pointer-events-none"></div>
         </div>
 
         {/* Rarity Scroll */}
@@ -379,7 +379,7 @@ export const ShopSection: React.FC = () => {
               className={`bg-card-dark border ${border} rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer`}
             >
               <div
-                className={`h-40 bg-gradient-to-t ${gradient} flex items-end justify-center relative overflow-hidden`}
+                className={`h-40 bg-linear-to-t ${gradient} flex items-end justify-center relative overflow-hidden`}
               >
                 {item.icon ? (
                   <Image
@@ -396,7 +396,7 @@ export const ShopSection: React.FC = () => {
                     </span>
                   </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-card-dark via-transparent to-transparent z-10 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-card-dark via-transparent to-transparent z-10 pointer-events-none"></div>
                 {isOnSale && (
                   <div className="absolute top-2 right-2 bg-red-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg uppercase">
                     Promoção
@@ -451,7 +451,7 @@ export const ShopSection: React.FC = () => {
       {/* Selected Item Overlay */}
       {selectedItem && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-4 bg-background-dark/90 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-100 flex items-center justify-center p-0 md:p-4 bg-background-dark/90 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setSelectedItem(null)}
         >
           <div
@@ -461,7 +461,7 @@ export const ShopSection: React.FC = () => {
             {/* Close button */}
             <button
               onClick={() => setSelectedItem(null)}
-              className="absolute top-4 right-4 z-[60] flex items-center justify-center bg-black/50 hover:bg-black md:bg-black/80 md:hover:bg-black text-white p-2 md:p-2.5 rounded-full transition-colors backdrop-blur-md"
+              className="absolute top-4 right-4 z-60 flex items-center justify-center bg-black/50 hover:bg-black md:bg-black/80 md:hover:bg-black text-white p-2 md:p-2.5 rounded-full transition-colors backdrop-blur-md"
             >
               <span className="material-symbols-outlined block text-base md:text-xl">
                 close
@@ -470,7 +470,7 @@ export const ShopSection: React.FC = () => {
 
             {/* Image Side */}
             <div
-              className={`w-full md:w-1/2 pt-16 pb-8 px-4 md:p-8 flex items-center justify-center relative min-h-[40vh] md:min-h-[300px] bg-gradient-to-b ${rarityGradients[selectedItem.rarity] || rarityGradients.common}`}
+              className={`w-full md:w-1/2 pt-16 pb-8 px-4 md:p-8 flex items-center justify-center relative min-h-[40vh] md:min-h-[300px] bg-linear-to-b ${rarityGradients[selectedItem.rarity] || rarityGradients.common}`}
             >
               {selectedItem.icon ? (
                 <div className="relative w-full h-[30vh] md:h-[60vh]">

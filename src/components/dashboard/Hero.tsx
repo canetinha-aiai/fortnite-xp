@@ -75,7 +75,7 @@ export const Hero: React.FC<HeroProps> = ({
     return (
       <section className={`mb-8 lg:mb-12 relative z-20 ${className}`}>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase italic tracking-tighter mb-1">
               Fortnite XP
             </h1>
