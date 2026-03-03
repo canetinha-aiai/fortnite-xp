@@ -15,12 +15,16 @@ interface ShopEntry {
     description: string;
     rarity: { value: string; displayValue: string };
     images: { icon: string; featured?: string };
+    set?: { value: string; displayValue: string };
+    introduction?: { text: string };
   }>;
   tracks?: Array<{
     id: string;
     title: string;
     artist: string;
     albumArt: string;
+    releaseYear: number;
+    bpm: number;
   }>;
   instruments?: Array<{
     id: string;
