@@ -1,5 +1,7 @@
 # Standard Next.js gitignore
 
+package-lock.json
+
 # dependencies
 node_modules
 .pnp
@@ -52,4 +54,3 @@ next-env.d.ts
 # Project specific
 temp/
 stitch-skills/
-shopExample.json
