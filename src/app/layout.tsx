@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     default: "Fortnite XP | Calculadora de Progressão",
     template: "%s | Fortnite XP",
   },
+  alternates: {
+    canonical: "/",
+  },
   description:
     "Acompanhe e calcule sua progressão de níveis e passos no Passe de Batalha do Fortnite de forma rápida e precisa.",
   keywords: [
