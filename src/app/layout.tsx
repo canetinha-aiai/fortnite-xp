@@ -20,8 +20,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   description:
-    "Acompanhe e calcule sua progressão de níveis e passos no Passe de Batalha do Fortnite de forma rápida e precisa.",
+    "Fortnite XP: Acompanhe e calcule sua progressão de níveis e passos no Passe de Batalha do Fortnite de forma rápida e precisa.",
   keywords: [
+    "Fortnite XP",
     "Fortnite",
     "XP",
     "Calculadora",
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Fortnite XP | Calculadora de Progressão",
     description:
-      "Acompanhe e calcule sua progressão de níveis e passos no Passe de Batalha do Fortnite.",
+      "Fortnite XP: Acompanhe sua progressão de níveis e passos no Passe de Batalha do Fortnite.",
     url: "/",
     siteName: "Fortnite XP",
     locale: "pt_BR",
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fortnite XP | Calculadora de Progressão",
     description:
-      "Acompanhe e calcule sua progressão de níveis e passos no Passe de Batalha do Fortnite.",
+      "Fortnite XP: Acompanhe sua progressão de níveis e passos no Passe de Batalha do Fortnite.",
   },
   icons: {
     icon: [
