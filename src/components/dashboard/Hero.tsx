@@ -84,7 +84,7 @@ export const Hero: React.FC<HeroProps> = ({
             </h2>
           </div>
 
-          <div className="bg-card-dark border-2 border-border-dark p-3 lg:p-4 rounded-xl flex flex-col md:flex-row gap-3 md:items-end shadow-lg w-full lg:w-auto">
+          <div className="bg-card-dark border-2 border-border-dark p-3 lg:p-4 rounded-xl flex flex-col md:flex-row gap-4 md:items-start shadow-lg w-full lg:w-auto">
             <div className="min-w-[200px] flex-1">
               <label className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
                 Seu Estilo de Jogo
@@ -159,16 +159,21 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
             </div>
 
-            <button
-              onClick={handleCalculate}
-              aria-label="Atualizar cálculos"
-              className="group bg-primary hover:bg-primary-hover text-background-dark font-black px-4 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(20,255,0,0.3)] active:translate-y-0 active:shadow-none uppercase text-xs h-[38px] w-full md:w-auto"
-            >
-              <span className="material-symbols-outlined text-sm transition-transform duration-300 group-hover:rotate-180">
-                sync
-              </span>
-              ATUALIZAR
-            </button>
+            <div className="flex flex-col w-full md:w-auto">
+              <div className="hidden md:block text-[10px] mb-1 select-none opacity-0">
+                Spacer
+              </div>
+              <button
+                onClick={handleCalculate}
+                aria-label="Atualizar cálculos"
+                className="group bg-primary hover:bg-primary-hover text-background-dark font-black px-4 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(20,255,0,0.3)] active:translate-y-0 active:shadow-none uppercase text-xs h-[38px]"
+              >
+                <span className="material-symbols-outlined text-sm transition-transform duration-300 group-hover:rotate-180">
+                  sync
+                </span>
+                ATUALIZAR
+              </button>
+            </div>
           </div>
         </div>
       </section>
