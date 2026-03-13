@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchSeasonInfo } from "@/services/fortniteApi";
+//import { fetchSeasonInfo } from "@/services/fortniteApi";
 import { PlaystyleId } from "@/lib/constants";
 
 export const useFortniteStats = () => {
@@ -12,8 +12,8 @@ export const useFortniteStats = () => {
   useEffect(() => {
     const initSeason = async () => {
       try {
-        const seasonInfo = await fetchSeasonInfo();
-        const endDate = new Date(seasonInfo.seasonDateEnd);
+        //const seasonInfo = await fetchSeasonInfo();
+        const endDate = new Date("2026-03-19T00:00:00.000Z");
         const now = new Date();
         const diff = endDate.getTime() - now.getTime();
         const days = Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)));
