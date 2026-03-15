@@ -1,10 +1,14 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "@/context/LanguageContext";
 
 interface FooterProps {
   readonly className?: string;
 }
 
 export const Footer: React.FC<FooterProps> = ({ className = "" }) => {
+  const { t } = useTranslation();
   return (
     <footer
       className={`border-t border-border-dark bg-card-dark py-12 px-6 lg:px-20 mt-20 ${className}`}
@@ -19,14 +23,14 @@ export const Footer: React.FC<FooterProps> = ({ className = "" }) => {
           </div>
           
           <nav className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-8">
-            <a href="/about" className="text-[10px] text-slate-400 hover:text-primary font-bold uppercase tracking-widest transition-colors">Sobre</a>
-            <a href="/privacy-policy" className="text-[10px] text-slate-400 hover:text-primary font-bold uppercase tracking-widest transition-colors">Privacidade</a>
-            <a href="/terms" className="text-[10px] text-slate-400 hover:text-primary font-bold uppercase tracking-widest transition-colors">Termos</a>
+            <a href="/about" className="text-[10px] text-slate-400 hover:text-primary font-bold uppercase tracking-widest transition-colors">{t.nav.about}</a>
+            <a href="/privacy-policy" className="text-[10px] text-slate-400 hover:text-primary font-bold uppercase tracking-widest transition-colors">{t.nav.privacy}</a>
+            <a href="/terms" className="text-[10px] text-slate-400 hover:text-primary font-bold uppercase tracking-widest transition-colors">{t.nav.terms}</a>
           </nav>
         </div>
 
         <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
-          Não afiliado à <span className="text-slate-300">Epic Games</span>
+          {t.footer.disclaimer}
         </p>
       </div>
     </footer>

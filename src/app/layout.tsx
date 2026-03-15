@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import React from "react";
 import "./globals.css";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || "https://fortnite-xp.vercel.app",
   ),
   title: {
-    default: "XP Fortnite | Calculadora de Progressão & Níveis",
+    default: "XP Fortnite | Fortnite XP Calculator & Níveis",
     template: "%s | XP Fortnite",
   },
   alternates: {
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
   description:
     "XP Fortnite: Acompanhe e calcule sua progressão de níveis e passos no Passe de Batalha de forma rápida e precisa. Saiba quanto falta para o nível 100 e 200.",
   keywords: [
+    "Fortnite XP Calculator",
     "XP Fortnite",
     "Fortnite XP",
     "Fortnite",
@@ -117,7 +119,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${spaceGrotesk.variable} antialiased`}>{children}</body>
+      <body className={`${spaceGrotesk.variable} antialiased`}>
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }

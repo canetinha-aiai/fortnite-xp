@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const res = await fetch("https://fortnite-api.com/v2/shop?language=pt-BR", {
+    const { searchParams } = new URL(request.url);
+    const lang = searchParams.get("lang") || "pt-BR";
+    
+    const res = await fetch(`https://fortnite-api.com/v2/shop?language=${lang}`, {
       next: { revalidate: 3600 }, // Cache por 1 hora
     });
 

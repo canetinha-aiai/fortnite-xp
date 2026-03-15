@@ -1,5 +1,8 @@
+"use client";
+
 import React, { useState } from "react";
 import { PLAYSTYLES, PlaystyleId } from "@/lib/constants";
+import { useTranslation } from "@/context/LanguageContext";
 import PlaystyleSelector from "./PlaystyleSelector";
 
 interface HeroProps {
@@ -11,7 +14,6 @@ interface HeroProps {
     playstyleId: PlaystyleId;
   }) => void;
   readonly isCalculated?: boolean;
-  readonly seasonEndDate?: Date | null;
 }
 
 export const Hero: React.FC<HeroProps> = ({
@@ -19,6 +21,7 @@ export const Hero: React.FC<HeroProps> = ({
   onCalculate,
   isCalculated = false,
 }) => {
+  const { t, language } = useTranslation();
   const [currentLevelStr, setCurrentLevelStr] = useState("1");
   const [targetLevelStr, setTargetLevelStr] = useState("200");
   const [playstyleId, setPlaystyleId] = useState<PlaystyleId>("regular");
@@ -28,7 +31,7 @@ export const Hero: React.FC<HeroProps> = ({
 
   const selectedPlaystyle =
     playstyleId === "custom"
-      ? { id: "custom" as const, label: "Personalizado", xp: Math.max(10000, parseInt(customXPStr || "0", 10)) }
+      ? { id: "custom" as const, label: t.playstyles.custom, xp: Math.max(10000, parseInt(customXPStr || "0", 10)) }
       : PLAYSTYLES.find((p) => p.id === playstyleId) || PLAYSTYLES[1];
 
   const validateAndFormat = (val: string, max: number = 1000) => {
@@ -64,10 +67,10 @@ export const Hero: React.FC<HeroProps> = ({
     (!customXPStr || parseInt(customXPStr, 10) < 10000);
 
   const getHumorMessage = (level: number) => {
-    if (level === 1000) return "VOU CONTAR PRA SUA MÃE! 👵";
-    if (level >= 800) return "VOCÊ É UM ROBÔ? 🤖";
-    if (level >= 500) return "VAI TOMAR UM BANHO! 🚿";
-    if (level >= 400) return "VOCÊ JÁ VIU UMA ÁRVORE HOJE? 🌳";
+    if (level === 1000) return t.humor.level1000;
+    if (level >= 800) return t.humor.level800;
+    if (level >= 500) return t.humor.level500;
+    if (level >= 400) return t.humor.level400;
     return "";
   };
 
@@ -127,17 +130,17 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 lg:gap-6">
           <div className="shrink-0 text-center lg:text-left">
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-black text-white uppercase italic tracking-tighter mb-0.5 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-              Fortnite XP
+              {t.hero.title}
             </h1>
             <h2 className="text-primary text-[10px] md:text-xl font-black uppercase tracking-widest italic opacity-80">
-              Painel de Resultados
+              {t.hero.resultsPanel}
             </h2>
           </div>
 
           <div className="bg-card-dark border-2 border-border-dark p-3 lg:p-4 rounded-xl flex flex-col md:flex-row gap-4 md:items-start shadow-lg w-full lg:w-auto">
             <div className="min-w-[200px] flex-1">
               <label className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
-                Seu Estilo de Jogo
+                {t.hero.yourPlaystyle}
               </label>
               <div className="relative flex flex-col">
                 <PlaystyleSelector
@@ -154,7 +157,7 @@ export const Hero: React.FC<HeroProps> = ({
                 />
                 {playstyleId !== "custom" && (
                   <span className="text-[9px] text-primary/80 font-bold uppercase tracking-widest mt-1.5 ml-1">
-                    ~{(selectedPlaystyle.xp / 1000).toLocaleString()}K XP / PARTIDA
+                    ~{(selectedPlaystyle.xp / 1000).toLocaleString()} {t.hero.xpPerMatch}
                   </span>
                 )}
               </div>
@@ -163,7 +166,7 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="flex gap-3 flex-1 md:max-w-[250px]">
               <div className="flex-1">
                 <label className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
-                  Atual
+                  {t.hero.levelCurrent}
                 </label>
                 <input
                   id="current-level-compact"
@@ -183,7 +186,7 @@ export const Hero: React.FC<HeroProps> = ({
 
               <div className="flex-1">
                 <label className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">
-                  Alvo
+                  {t.hero.levelTarget}
                 </label>
                 <input
                   id="target-level-compact"
@@ -215,7 +218,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <span className={`material-symbols-outlined text-sm transition-transform duration-300 ${isCalculating ? 'animate-spin' : 'group-hover:rotate-180'}`}>
                   sync
                 </span>
-                {isCalculating ? 'CALCULANDO' : 'ATUALIZAR'}
+                {isCalculating ? t.hero.calculating : (isCalculated ? t.hero.update : t.hero.calculate)}
               </button>
             </div>
           </div>
@@ -232,18 +235,19 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div className="mb-8 lg:mb-16 relative z-20 max-w-3xl">
         <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black text-white uppercase italic tracking-tighter mb-2 drop-shadow-[0_0_30px_rgba(255,255,0,0.1)] leading-[0.85]">
-          <span className="text-primary">XP</span> Fortnite 
+          {language === 'en' ? (
+            <>Fortnite <span className="text-primary">XP</span> Calculator</>
+          ) : (
+            <><span className="text-primary">XP</span> Fortnite</>
+          )}
         </h1>
         <h2 className="text-primary text-[10px] sm:text-sm lg:text-xl font-black uppercase tracking-widest italic mb-6 lg:mb-8 flex items-center justify-center gap-3 lg:gap-4 leading-none">
           <span className="h-px w-6 lg:w-16 bg-primary/30"></span>
-          Calculadora de Meta
+          {t.hero.subtitle}
           <span className="h-px w-6 lg:w-16 bg-primary/30"></span>
         </h2>
         <p className="text-slate-400 text-xs md:text-lg lg:text-xl font-medium px-6 leading-relaxed balance max-w-[280px] sm:max-w-none mx-auto">
-          Analise sua progressão e descubra exatamente o{" "}
-          <strong className="text-white font-bold">XP necessário</strong> para
-          completar o seu{" "}
-          <strong className="text-primary font-bold italic">Passe de Batalha</strong>.
+          {t.hero.description}
         </p>
       </div>
 
@@ -260,7 +264,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <div className="h-full bg-primary transition-all duration-75 ease-out shadow-[0_0_10px_rgba(255,255,0,0.5)]" style={{ width: `${calculationProgress}%` }} />
               </div>
               <p className="text-primary font-black uppercase italic tracking-widest text-lg animate-pulse">
-                Escaneando Temporada...
+                {t.hero.scanningSeason}
               </p>
             </div>
           )}
@@ -268,7 +272,7 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start relative z-20">
             <div className="space-y-2 text-left">
               <label className="block text-[10px] text-slate-500 font-bold uppercase tracking-widest ml-1">
-                Nível Atual
+                {t.hero.levelCurrent}
               </label>
               <input
                 className="w-full bg-background-dark/50 border border-border-dark text-white font-black py-2 sm:py-3 px-4 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-base sm:text-lg lg:text-lg shadow-inner"
@@ -282,7 +286,7 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="space-y-2 text-left">
               <div className="flex justify-between items-center ml-1">
                 <label className="block text-[10px] text-slate-500 font-bold uppercase tracking-widest">
-                  Nível Alvo
+                  {t.hero.levelTarget}
                 </label>
                 {humorMsg && <span className="text-[10px] font-black text-red-500 animate-bounce">{humorMsg}</span>}
               </div>
@@ -297,7 +301,7 @@ export const Hero: React.FC<HeroProps> = ({
 
             <div className="space-y-2 text-left">
               <label className="block text-[10px] text-slate-500 font-bold uppercase tracking-widest ml-1">
-                Estilo de Jogo
+                {t.hero.playstyle}
               </label>
               <PlaystyleSelector
                 playstyleId={playstyleId}
@@ -317,7 +321,7 @@ export const Hero: React.FC<HeroProps> = ({
           >
             <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-[-20deg]" />
             <span className="material-symbols-outlined text-xl sm:text-3xl group-hover:rotate-12 transition-transform">bolt</span>
-            CALCULAR ESTRATÉGIA
+            {t.hero.calculate}
           </button>
         </div>
       </div>

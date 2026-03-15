@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
+import { useTranslation } from "@/context/LanguageContext";
 
 interface ShopEntry {
   offerId: string;
@@ -123,6 +124,7 @@ interface DisplayItem {
 }
 
 export const ShopSection: React.FC = () => {
+  const { t, language } = useTranslation();
   const [shop, setShop] = useState<ShopData | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string>("All");
@@ -131,8 +133,10 @@ export const ShopSection: React.FC = () => {
 
   useEffect(() => {
     const fetchShop = async () => {
+      setLoading(true);
       try {
-        const res = await fetch("/api/fortnite/shop");
+        const apiLang = language === "pt" ? "pt-BR" : "en";
+        const res = await fetch(`/api/fortnite/shop?lang=${apiLang}`);
         if (res.ok) {
           const data = await res.json();
           setShop(data);
@@ -144,7 +148,7 @@ export const ShopSection: React.FC = () => {
       }
     };
     fetchShop();
-  }, []);
+  }, [language]);
 
   const displayItems = useMemo(() => {
     if (!shop?.data?.entries) return [];
@@ -164,7 +168,7 @@ export const ShopSection: React.FC = () => {
       if (entry.bundle) {
         name = entry.bundle.name;
         icon = entry.bundle.image;
-        type = "Pacotão";
+        type = t.shop.bundle;
         if (entry.brItems?.[0]) {
           rarityValue = entry.brItems[0].rarity.value;
           rarityDisplay = entry.brItems[0].rarity.displayValue;
@@ -175,7 +179,7 @@ export const ShopSection: React.FC = () => {
       } else if (entry.brItems && entry.brItems.length > 0) {
         const mainItem = entry.brItems[0];
         name = mainItem.name;
-        type = "Cosmético";
+        type = t.shop.cosmetic;
         rarityValue = mainItem.rarity.value;
         rarityDisplay = mainItem.rarity.displayValue;
         icon = mainItem.images.featured || mainItem.images.icon;
@@ -185,20 +189,20 @@ export const ShopSection: React.FC = () => {
       } else if (entry.tracks && entry.tracks.length > 0) {
         const track = entry.tracks[0];
         name = `${track.title} - ${track.artist}`;
-        type = "Música de Jam";
+        type = t.shop.jamTrack;
         rarityValue = "icon";
-        rarityDisplay = "Série Ícones";
+        rarityDisplay = t.shop.iconSeries;
         icon = track.albumArt;
         description = `Ano: ${track.releaseYear} • BPM: ${track.bpm}`;
       } else if (entry.instruments && entry.instruments.length > 0) {
         const inst = entry.instruments[0];
         name = inst.name;
-        type = "Instrumento";
+        type = t.shop.instrument;
         icon = inst.images.large;
       } else if (entry.cars && entry.cars.length > 0) {
         const car = entry.cars[0];
         name = car.name;
-        type = "Carro";
+        type = t.shop.car;
         icon = car.images.large;
       }
 
@@ -210,7 +214,7 @@ export const ShopSection: React.FC = () => {
       // Favor render images as they are high quality with transparent backgrounds
       icon = renderImage || materialImage || icon;
 
-      const categoryName = entry.layout?.name || "Outros";
+      const categoryName = entry.layout?.name || t.shop.others;
 
       items.push({
         id: entry.offerId,
@@ -228,7 +232,7 @@ export const ShopSection: React.FC = () => {
       });
     }
     return items;
-  }, [shop]);
+  }, [shop, t]);
 
   // Deduplicate items by name
   const uniqueItems = useMemo(() => {
@@ -271,7 +275,7 @@ export const ShopSection: React.FC = () => {
           sync
         </span>
         <p className="text-slate-500 mt-4 text-xs uppercase tracking-widest font-bold">
-          Carregando Loja...
+          {t.shop.loading}
         </p>
       </div>
     );
@@ -286,7 +290,7 @@ export const ShopSection: React.FC = () => {
           storefront
         </span>
         <p className="text-slate-500 mt-4 text-sm">
-          Sem itens na loja no momento. Volte mais tarde!
+          {t.shop.emptyShop}
         </p>
       </div>
     );
@@ -301,12 +305,12 @@ export const ShopSection: React.FC = () => {
               storefront
             </span>
             <h2 className="text-2xl lg:text-4xl font-black text-white uppercase italic tracking-tighter">
-              Loja de Itens
+              {t.shop.title}
             </h2>
           </div>
           <p className="text-slate-500 text-xs lg:text-sm ml-12">
-            {filteredItems.length} itens{" "}
-            {activeCategory !== "All" && `em ${activeCategory}`}
+            {t.shop.itemsCount.replace("{count}", filteredItems.length.toString())}{" "}
+            {activeCategory !== "All" && `${t.shop.inSection.replace("{category}", activeCategory)}`}
           </p>
         </div>
       </div>
@@ -327,7 +331,7 @@ export const ShopSection: React.FC = () => {
                       : "bg-background-dark/80 text-slate-400 hover:text-white hover:border-slate-600 border-border-dark"
                   }`}
                 >
-                  {cat === "All" ? "Todos os Itens" : cat}
+                  {cat === "All" ? t.shop.allItems : cat}
                 </button>
               ))}
             </div>
@@ -341,7 +345,7 @@ export const ShopSection: React.FC = () => {
           <div className="overflow-x-auto pb-6 theme-scrollbar snap-x snap-mandatory">
             <div className="flex gap-2 min-w-max px-2">
               <span className="text-[10px] uppercase font-bold text-slate-500 tracking-widest flex items-center mr-2">
-                Raridade:
+                {t.shop.rarityLabel}
               </span>
               {rarityTabs.map((rar) => {
                 const rarKey = rar === "All" ? "common" : displayToRarity[rar];
@@ -359,7 +363,7 @@ export const ShopSection: React.FC = () => {
                         : "bg-background-dark/50 text-slate-500 border-border-dark hover:text-slate-300"
                     }`}
                   >
-                    {rar === "All" ? "Todas" : rar}
+                    {rar === "All" ? t.shop.allRarities : rar}
                   </button>
                 );
               })}
@@ -403,7 +407,7 @@ export const ShopSection: React.FC = () => {
                 <div className="absolute inset-0 bg-linear-to-t from-card-dark via-transparent to-transparent z-10 pointer-events-none"></div>
                 {isOnSale && (
                   <div className="absolute top-2 right-2 bg-red-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg uppercase">
-                    Promoção
+                    {t.shop.onSale}
                   </div>
                 )}
               </div>
@@ -441,7 +445,7 @@ export const ShopSection: React.FC = () => {
                       <span className="text-white font-black text-xs">
                         {item.price > 0
                           ? item.price.toLocaleString()
-                          : "Grátis"}
+                          : t.shop.free}
                       </span>
                     )}
                   </div>
@@ -519,7 +523,7 @@ export const ShopSection: React.FC = () => {
                     </span>
                     <div>
                       <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">
-                        Conjunto
+                        {t.shop.set}
                       </p>
                       <p className="text-white font-medium">
                         {selectedItem.setId}
@@ -534,7 +538,7 @@ export const ShopSection: React.FC = () => {
                     </span>
                     <div>
                       <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">
-                        Introdução
+                        {t.shop.introduction}
                       </p>
                       <p className="text-white font-medium">
                         {selectedItem.introduction}
@@ -548,8 +552,8 @@ export const ShopSection: React.FC = () => {
                 <div className="flex flex-col">
                   <p className="text-[9px] md:text-[10px] uppercase font-bold text-slate-500 tracking-wider mb-0.5 md:mb-1">
                     {selectedItem.regularPrice > selectedItem.price
-                      ? "Preço Promocional"
-                      : "Preço Atual"}
+                      ? t.shop.promoPrice
+                      : t.shop.currentPrice}
                   </p>
                   <div className="flex items-end gap-3 md:gap-4">
                     <div className="flex items-center gap-1.5 md:gap-2">
@@ -569,7 +573,7 @@ export const ShopSection: React.FC = () => {
                       <span className="text-white font-black text-3xl md:text-4xl tracking-tighter">
                         {selectedItem.price > 0
                           ? selectedItem.price.toLocaleString()
-                          : "Grátis"}
+                          : t.shop.free}
                       </span>
                     </div>
 
@@ -588,7 +592,7 @@ export const ShopSection: React.FC = () => {
                   selectedItem.price > 0 && (
                     <div className="bg-primary/20 border border-primary/50 px-3 md:px-4 py-1 flex flex-col items-center justify-center transform rotate-2 rounded-lg">
                       <span className="text-primary font-black text-xs md:text-sm uppercase tracking-widest leading-none mb-1">
-                        Desconto
+                        {t.shop.discount}
                       </span>
                       <span className="text-white font-black text-sm md:text-base leading-none">
                         -

@@ -1,5 +1,7 @@
-import React from "react";
+"use client";
+
 import { PLAYSTYLES, PlaystyleId } from "@/lib/constants";
+import { useTranslation } from "@/context/LanguageContext";
 
 interface PlaystyleSelectorProps {
   readonly playstyleId: PlaystyleId;
@@ -20,6 +22,7 @@ export const PlaystyleSelector: React.FC<PlaystyleSelectorProps> = ({
   compact = false,
   isInvalid = false,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className={`relative flex flex-col ${compact ? "" : "w-full"}`}>
       <div className="relative">
@@ -34,10 +37,10 @@ export const PlaystyleSelector: React.FC<PlaystyleSelectorProps> = ({
         >
           {PLAYSTYLES.map((p) => (
             <option key={p.id} value={p.id}>
-              {p.label}
+              {t.playstyles[p.id as keyof typeof t.playstyles]}
             </option>
           ))}
-          <option value="custom">Personalizado</option>
+          <option value="custom">{t.playstyles.custom}</option>
         </select>
         <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none text-sm">
           expand_more
@@ -71,7 +74,7 @@ export const PlaystyleSelector: React.FC<PlaystyleSelectorProps> = ({
           </div>
           {isInvalid && (
             <span className="absolute left-0 -bottom-6 text-[10px] text-red-500 font-bold uppercase tracking-tight animate-pulse whitespace-nowrap">
-              Mínimo de 10.000 XP
+              {t.hero.minXpWarning}
             </span>
           )}
         </div>

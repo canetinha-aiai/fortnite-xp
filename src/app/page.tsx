@@ -9,6 +9,7 @@ import PlayerDashboard from "@/components/dashboard/PlayerDashboard";
 import SectionDivider from "@/components/dashboard/SectionDivider";
 import Accordion from "@/components/dashboard/Accordion";
 import { useFortniteStats } from "@/hooks/useFortniteStats";
+import { useTranslation } from "@/context/LanguageContext";
 
 export default function Home() {
   const {
@@ -21,6 +22,7 @@ export default function Home() {
     calculate,
     reset,
   } = useFortniteStats();
+  const { t } = useTranslation();
 
   return (
     <Layout>
@@ -28,14 +30,12 @@ export default function Home() {
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-6 py-6 md:py-10 lg:px-20 z-10 relative">
         <Hero
           onCalculate={calculate}
-          daysRemaining={daysRemaining}
-          seasonEndDate={seasonEndDate}
           isCalculated={calculated}
         />
 
         {calculated && currentLevel !== null && (
           <div className="animate-reveal delay-100">
-            <SectionDivider label="Resultados" />
+            <SectionDivider label={t.hero.resultsPanel} />
             <PlayerDashboard
               currentLevel={currentLevel}
               targetLevel={targetLevel}
@@ -46,7 +46,7 @@ export default function Home() {
         )}
 
         <div className="animate-reveal delay-200">
-          <SectionDivider icon="menu_book" label="Guia de Uso" />
+          <SectionDivider icon="menu_book" label={t.guide.title} />
         </div>
         
         <section className="mt-8 space-y-12 animate-reveal delay-300">
@@ -54,27 +54,27 @@ export default function Home() {
           <article className="space-y-10">
             <div className="text-center max-w-3xl mx-auto space-y-4 mb-10">
               <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter">
-                Como usar a <span className="text-primary">XP Fortnite</span>?
+                {t.guide.howTo.split('?')[0]} <span className="text-primary">XP Fortnite</span>?
               </h2>
               <p className="text-slate-400">
-                Siga nosso guia simples para calcular sua jornada e maximizar seus ganhos de XP.
+                {t.hero.description}
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
-                  title: "Nível Atual",
-                  text: "Insira seu nível exato visto no jogo. É o ponto de partida essencial para o cálculo.",
+                  title: t.guide.step1Title,
+                  text: t.guide.step1Text,
                   icon: "pin",
                 },
                 {
-                  title: "Defina seu Objetivo",
-                  text: "Nível 100 para o passe base, ou 200 para desbloquear todos os estilos de supernível.",
+                  title: t.guide.step2Title,
+                  text: t.guide.step2Text,
                   icon: "target",
                 },
                 {
-                  title: "Escolha seu Estilo",
-                  text: "Selecione como você costuma jogar para obter uma estimativa precisa de partidas.",
+                  title: t.guide.step3Title,
+                  text: t.guide.step3Text,
                   icon: "sports_esports",
                 },
               ].map((step, i) => (
@@ -97,9 +97,9 @@ export default function Home() {
                   <span className="material-symbols-outlined text-background-dark text-3xl font-bold">lightbulb</span>
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-xl font-black text-white uppercase italic">Dica de Mestre</h3>
+                  <h3 className="text-xl font-black text-white uppercase italic">{t.guide.masterTip}</h3>
                   <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
-                    A calculadora se ajusta automaticamente ao tempo restante da temporada. Planeje-se agora para evitar o correria e o &quot;grind&quot; desesperado nos dias finais!
+                    {t.guide.masterTipText}
                   </p>
                 </div>
               </div>
@@ -107,35 +107,34 @@ export default function Home() {
           </article>
 
           <div className="animate-reveal delay-400">
-            <SectionDivider icon="rocket_launch" label="Estratégias" />
+            <SectionDivider icon="rocket_launch" label={t.strategies.title} />
           </div>
 
           <article className="space-y-8 animate-reveal delay-500">
             <div className="text-center max-w-3xl mx-auto space-y-4">
               <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter">
-                Estratégias de <span className="text-primary">XP Fortnite</span>
+                {t.strategies.maximize.replace('XP Fortnite', '')} <span className="text-primary">XP Fortnite</span>
               </h2>
               <p className="text-slate-400">
-                Além de usar nossa calculadora, aqui estão as melhores formas de
-                ganhar XP rapidamente nesta temporada.
+                {t.strategies.maximizeDesc}
               </p>
             </div>
-
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
-                  title: "Missões Diárias e Semanais",
-                  desc: "São a fonte mais consistente. Foque nas Missões de História, pois elas oferecem grandes quantias de XP e contexto para a temporada.",
+                  title: t.strategies.strategy1Title,
+                  desc: t.strategies.strategy1Desc,
                   icon: "assignment",
                 },
                 {
-                  title: "Modos Criativos (UEFN)",
-                  desc: "Muitos mapas de UEFN premiam com XP por tempo de jogo. Mapas de Tycoon e Parkour costumam ser excelentes para 'farmar' XP passivo.",
+                  title: t.strategies.strategy2Title,
+                  desc: t.strategies.strategy2Desc,
                   icon: "map",
                 },
                 {
-                  title: "Salve o Mundo",
-                  desc: "Se você possui o modo Salve o Mundo, ele é uma das melhores fontes de XP para o Passe de Batalha através das missões diárias.",
+                  title: t.strategies.strategy3Title,
+                  desc: t.strategies.strategy3Desc,
                   icon: "security",
                 },
               ].map((item, i) => (
@@ -158,27 +157,27 @@ export default function Home() {
           </article>
 
           <div className="animate-reveal delay-500">
-            <SectionDivider icon="help" label="Dúvidas Comuns" />
+            <SectionDivider icon="help" label={t.faq.title} />
           </div>
 
           <article className="pb-12 animate-reveal delay-500">
             <Accordion
               items={[
                 {
-                  q: "Quanto XP preciso por nível?",
-                  a: "Na maioria das temporadas, cada nível exige exatos 80.000 XP. Isso significa que para ir do 1 ao 100, você precisa de 8 milhões de XP.",
+                  q: t.faq.q1,
+                  a: t.faq.a1,
                 },
                 {
-                  q: "O XP do Modo Criativo é limitado?",
-                  a: "Sim, existe um limite diário (cap) no Modo Criativo que costuma girar em torno de 400.000 XP por dia. Após isso, o ganho diminui drasticamente.",
+                  q: t.faq.q2,
+                  a: t.faq.a2,
                 },
                 {
-                  q: "Qual o nível máximo necessário?",
-                  a: "O nível 100 completa o passe base. O nível 200 é o objetivo da maioria dos jogadores, pois desbloqueia todos os estilos 'Super Level' (ouro, prismático, etc).",
+                  q: t.faq.q3,
+                  a: t.faq.a3,
                 },
                 {
-                  q: "A calculadora considera missões?",
-                  a: "Nossa calculadora foca na média de XP por tempo/estilo de jogo. As missões semanais são um bônus enorme que aceleram ainda mais o seu progresso.",
+                  q: t.faq.q4,
+                  a: t.faq.a4,
                 },
               ]}
             />

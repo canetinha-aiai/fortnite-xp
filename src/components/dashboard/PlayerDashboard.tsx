@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import { PLAYSTYLES, XP_PER_LEVEL } from "@/lib/constants";
+import { useTranslation } from "@/context/LanguageContext";
 
 interface PlayerDashboardProps {
   readonly currentLevel: number;
@@ -16,6 +19,7 @@ export const PlayerDashboard: React.FC<PlayerDashboardProps> = ({
   daysRemaining,
   className = "",
 }) => {
+  const { t } = useTranslation();
   const selectedStyle =
     PLAYSTYLES.find((p) => p.id === playstyleId) || PLAYSTYLES[1];
   const XP_PER_MATCH_AVG = selectedStyle.xp;
@@ -51,15 +55,15 @@ export const PlayerDashboard: React.FC<PlayerDashboardProps> = ({
             </div>
             <div>
               <span className="text-[10px] text-primary font-bold uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded">
-                Calculadora de XP
+                Fortnite XP
               </span>
               <h2 className="text-3xl lg:text-5xl font-black text-white uppercase italic mt-1">
                 {isGoalReached ? (
-                  <span className="text-green-400">META ALCANÇADA! 🎉</span>
+                  <span className="text-green-400">{t.dashboard.goalReached}</span>
                 ) : (
                   <>
                     {levelsNeeded}{" "}
-                    <span className="text-primary">NÍVEIS RESTANTES</span>
+                    <span className="text-primary">{t.dashboard.levelsLeft}</span>
                   </>
                 )}
               </h2>
@@ -69,7 +73,7 @@ export const PlayerDashboard: React.FC<PlayerDashboardProps> = ({
           <div className="flex flex-col gap-4 lg:min-w-[400px]">
             <div className="flex justify-between items-end mb-1">
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-                Progresso para a Meta
+                {t.dashboard.progressTitle}
               </span>
               <span className="text-primary font-black italic">
                 LVL {currentLevel} → {targetLevel}
@@ -86,13 +90,13 @@ export const PlayerDashboard: React.FC<PlayerDashboardProps> = ({
             <div className="flex justify-between mt-2">
               <div className="flex flex-col">
                 <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">
-                  Atual
+                  {t.dashboard.current}
                 </span>
                 <span className="text-white font-bold">LVL {currentLevel}</span>
               </div>
               <div className="flex flex-col text-right">
                 <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">
-                  Alvo
+                  {t.dashboard.target}
                 </span>
                 <span className="text-primary font-bold">
                   LVL {targetLevel}
@@ -113,7 +117,7 @@ export const PlayerDashboard: React.FC<PlayerDashboardProps> = ({
               </span>
             </div>
             <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-widest mb-2 block">
-              XP Total Necessário
+              {t.dashboard.totalXpNeeded}
             </span>
             <h3 className="text-3xl font-black text-white uppercase italic">
               {(totalXpNeeded / 1000000).toLocaleString(undefined, {
@@ -123,7 +127,7 @@ export const PlayerDashboard: React.FC<PlayerDashboardProps> = ({
               <span className="text-primary ml-1">M</span>
             </h3>
             <p className="text-[10px] text-slate-400 mt-2 uppercase font-bold tracking-tight">
-              {totalMatchesNeeded.toLocaleString()} partidas necessárias
+              {t.dashboard.partidasNecessarias.replace('{count}', totalMatchesNeeded.toLocaleString())}
             </p>
           </article>
 
@@ -132,14 +136,14 @@ export const PlayerDashboard: React.FC<PlayerDashboardProps> = ({
               <span className="material-symbols-outlined text-6xl">today</span>
             </div>
             <span className="text-[10px] text-primary font-extrabold uppercase tracking-widest mb-2 block">
-              Meta Diária
+              {t.dashboard.dailyGoal}
             </span>
             <h3 className="text-3xl font-black text-white uppercase italic">
               {matchesPerDay}
-              <span className="text-primary ml-1">PARTIDAS</span>
+              <span className="text-primary ml-1">{t.dashboard.partidas}</span>
             </h3>
             <p className="text-[10px] text-primary/70 mt-2 uppercase font-bold tracking-tight">
-              {daysRemaining} dias restantes na temporada
+              {daysRemaining} {t.dashboard.daysRemaining.toLowerCase()}
             </p>
           </article>
 
@@ -150,14 +154,14 @@ export const PlayerDashboard: React.FC<PlayerDashboardProps> = ({
               </span>
             </div>
             <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-widest mb-2 block">
-              Meta Semanal
+              {t.dashboard.weeklyGoal}
             </span>
             <h3 className="text-3xl font-black text-white uppercase italic">
               {matchesPerWeek}
-              <span className="text-primary ml-1">PARTIDAS</span>
+              <span className="text-primary ml-1">{t.dashboard.partidas}</span>
             </h3>
             <p className="text-[10px] text-slate-400 mt-2 uppercase font-bold tracking-tight">
-              Média de {XP_PER_MATCH_AVG.toLocaleString()} XP por partida
+              {t.dashboard.xpPerMatchAvg.replace('{xp}', XP_PER_MATCH_AVG.toLocaleString())}
             </p>
           </article>
         </div>

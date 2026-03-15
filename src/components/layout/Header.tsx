@@ -3,20 +3,22 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useTranslation } from "@/context/LanguageContext";
 
 interface HeaderProps {
   readonly className?: string;
   readonly onReset?: () => void;
 }
 
-const navLinks = [
-  { href: "/", label: "Calculadora", icon: "calculate" },
-  { href: "/shop", label: "Loja", icon: "storefront" },
-];
-
 export const Header: React.FC<HeaderProps> = ({ className = "", onReset }) => {
+  const { t, language, setLanguage } = useTranslation();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+  const navLinks = [
+    { href: "/", label: t.nav.calculator, icon: "calculate" },
+    { href: "/shop", label: t.nav.shop, icon: "storefront" },
+  ];
 
   return (
     <header
@@ -55,6 +57,15 @@ export const Header: React.FC<HeaderProps> = ({ className = "", onReset }) => {
               </Link>
             );
           })}
+          
+          <div className="h-6 w-px bg-border-dark mx-2" />
+          
+          <button 
+            onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
+            className="text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded bg-background-dark border border-border-dark text-slate-400 hover:text-primary transition-colors hover:border-primary/30"
+          >
+            {language === 'pt' ? 'EN' : 'PT'}
+          </button>
         </nav>
 
         {/* Mobile Hamburger Button */}
