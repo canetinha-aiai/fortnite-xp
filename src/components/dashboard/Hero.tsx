@@ -232,7 +232,7 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div className="mb-8 lg:mb-16 relative z-20 max-w-3xl">
         <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black text-white uppercase italic tracking-tighter mb-2 drop-shadow-[0_0_30px_rgba(255,255,0,0.1)] leading-[0.85]">
-          Fortnite <span className="text-primary">XP</span>
+          <span className="text-primary">XP</span> Fortnite 
         </h1>
         <h2 className="text-primary text-[10px] sm:text-sm lg:text-xl font-black uppercase tracking-widest italic mb-6 lg:mb-8 flex items-center justify-center gap-3 lg:gap-4 leading-none">
           <span className="h-px w-6 lg:w-16 bg-primary/30"></span>

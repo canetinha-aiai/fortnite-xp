@@ -49,9 +49,17 @@ export default function Home() {
           <SectionDivider icon="menu_book" label="Guia de Uso" />
         </div>
         
-        <section className="mt-8 space-y-12">
+        <section className="mt-8 space-y-12 animate-reveal delay-300">
           {/* How to Use Section */}
-          <article className="space-y-10 animate-reveal delay-300">
+          <article className="space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-4 mb-10">
+              <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter">
+                Como usar a <span className="text-primary">XP Fortnite</span>?
+              </h2>
+              <p className="text-slate-400">
+                Siga nosso guia simples para calcular sua jornada e maximizar seus ganhos de XP.
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
@@ -105,12 +113,11 @@ export default function Home() {
           <article className="space-y-8 animate-reveal delay-500">
             <div className="text-center max-w-3xl mx-auto space-y-4">
               <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter">
-                Estratégias para{" "}
-                <span className="text-primary">Maximizar seu XP</span>
+                Estratégias de <span className="text-primary">XP Fortnite</span>
               </h2>
               <p className="text-slate-400">
                 Além de usar nossa calculadora, aqui estão as melhores formas de
-                ganhar XP rapidamente nesta temporada do Fortnite.
+                ganhar XP rapidamente nesta temporada.
               </p>
             </div>
 
