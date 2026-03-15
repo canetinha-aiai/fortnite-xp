@@ -27,4 +27,4 @@ export const PLAYSTYLES = [
   },
 ] as const;
 
-export type PlaystyleId = (typeof PLAYSTYLES)[number]["id"];
+export type PlaystyleId = (typeof PLAYSTYLES)[number]["id"] | "custom";

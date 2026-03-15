@@ -25,11 +25,14 @@ export const metadata: Metadata = {
     "Fortnite XP",
     "Fortnite",
     "XP",
-    "Calculadora",
+    "Calculadora de XP Fortnite",
     "Passe de Batalha",
     "Battle Pass",
     "Níveis",
     "Progresso",
+    "Como subir de nível rápido no fortnite",
+    "Quanto de XP falta para o nível 100",
+    "Quanto de XP falta para o nível 200",
     "Fortnite XP Calculator",
   ],
   authors: [{ name: "Fortnite XP Team" }],
@@ -70,6 +73,25 @@ export const metadata: Metadata = {
     apple: "/favicon/apple-touch-icon.png",
   },
   manifest: "/favicon/site.webmanifest",
+  category: "technology",
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Fortnite XP Calculator",
+  "operatingSystem": "All",
+  "applicationCategory": "ToolApplication",
+  "description": "Calculadora precisa de progressão para o Passe de Batalha do Fortnite. Saiba quanto XP falta para os níveis 100 e 200.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Fortnite XP Team"
+  }
 };
 
 export default function RootLayout({
@@ -88,6 +110,10 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className={`${spaceGrotesk.variable} antialiased`}>{children}</body>

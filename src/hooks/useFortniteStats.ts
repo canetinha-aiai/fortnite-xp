@@ -6,7 +6,7 @@ export const useFortniteStats = () => {
   const [currentLevel, setCurrentLevel] = useState<number | null>(null);
   const [targetLevel, setTargetLevel] = useState(200);
   const [playstyleId, setPlaystyleId] = useState<PlaystyleId>("regular");
-  const [daysRemaining, setDaysRemaining] = useState<number | null>(null);
+  const [seasonEndDate, setSeasonEndDate] = useState<Date | null>(null);
   const [calculated, setCalculated] = useState(false);
 
   useEffect(() => {
@@ -14,16 +14,23 @@ export const useFortniteStats = () => {
       try {
         //const seasonInfo = await fetchSeasonInfo();
         const endDate = new Date("2026-03-19T00:00:00.000Z");
-        const now = new Date();
-        const diff = endDate.getTime() - now.getTime();
-        const days = Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)));
-        setDaysRemaining(days);
+        setSeasonEndDate(endDate);
       } catch (err) {
         console.error("Error pre-fetching season info:", err);
       }
     };
     initSeason();
   }, []);
+
+  const daysRemaining = seasonEndDate
+    ? Math.max(
+        1,
+        Math.ceil(
+          (seasonEndDate.getTime() - new Date().getTime()) /
+            (1000 * 60 * 60 * 24),
+        ),
+      )
+    : null;
 
   const calculate = (data: {
     currentLevel: number;
@@ -45,6 +52,7 @@ export const useFortniteStats = () => {
     targetLevel,
     playstyleId,
     daysRemaining,
+    seasonEndDate,
     calculated,
     calculate,
     reset,

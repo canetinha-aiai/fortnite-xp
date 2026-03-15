@@ -11,7 +11,7 @@ interface HeaderProps {
 
 const navLinks = [
   { href: "/", label: "Calculadora", icon: "calculate" },
-  { href: "/shop", label: "Loja", icon: "storefront", disabled: true },
+  { href: "/shop", label: "Loja", icon: "storefront" },
 ];
 
 export const Header: React.FC<HeaderProps> = ({ className = "", onReset }) => {
@@ -42,9 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ className = "", onReset }) => {
               <Link
                 key={link.href}
                 href={link.href}
-                aria-disabled={link.disabled}
-                tabIndex={link.disabled ? -1 : undefined}
-                className={`flex items-center gap-1.5 text-xs lg:text-sm font-bold tracking-widest hover:text-primary transition-colors uppercase px-3 py-2 rounded-md ${link.disabled ? "pointer-events-none opacity-50 grayscale" : ""} ${
+                className={`flex items-center gap-1.5 text-xs lg:text-sm font-bold tracking-widest hover:text-primary transition-colors uppercase px-3 py-2 rounded-md ${
                   isActive
                     ? "text-primary bg-primary/10 border-b-2 border-primary"
                     : "text-slate-400"
@@ -54,11 +52,6 @@ export const Header: React.FC<HeaderProps> = ({ className = "", onReset }) => {
                   {link.icon}
                 </span>
                 <span>{link.label}</span>
-                {link.disabled && (
-                  <span className="ml-1 text-[9px] bg-border-dark px-1.5 py-0.5 rounded text-slate-300">
-                    Em breve
-                  </span>
-                )}
               </Link>
             );
           })}
@@ -84,13 +77,8 @@ export const Header: React.FC<HeaderProps> = ({ className = "", onReset }) => {
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={(e) => {
-                  if (link.disabled) e.preventDefault();
-                  else setIsMobileMenuOpen(false);
-                }}
-                aria-disabled={link.disabled}
-                tabIndex={link.disabled ? -1 : undefined}
-                className={`flex items-center justify-between text-sm font-bold tracking-widest uppercase px-4 py-4 rounded-xl transition-colors ${link.disabled ? "pointer-events-none opacity-50 grayscale" : ""} ${
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`flex items-center justify-between text-sm font-bold tracking-widest uppercase px-4 py-4 rounded-xl transition-colors ${
                   isActive
                     ? "text-primary bg-primary/10 border border-primary"
                     : "text-slate-400 hover:text-white hover:bg-background-dark"
@@ -102,11 +90,6 @@ export const Header: React.FC<HeaderProps> = ({ className = "", onReset }) => {
                   </span>
                   <span>{link.label}</span>
                 </div>
-                {link.disabled && (
-                  <span className="text-[10px] bg-border-dark px-2 py-1 rounded text-slate-300">
-                    Em breve
-                  </span>
-                )}
               </Link>
             );
           })}
