@@ -31,7 +31,11 @@ export const Hero: React.FC<HeroProps> = ({
 
   const selectedPlaystyle =
     playstyleId === "custom"
-      ? { id: "custom" as const, label: t.playstyles.custom, xp: Math.max(10000, parseInt(customXPStr || "0", 10)) }
+      ? {
+          id: "custom" as const,
+          label: t.playstyles.custom,
+          xp: Math.max(10000, parseInt(customXPStr || "0", 10)),
+        }
       : PLAYSTYLES.find((p) => p.id === playstyleId) || PLAYSTYLES[1];
 
   const validateAndFormat = (val: string, max: number = 1000) => {
@@ -52,7 +56,11 @@ export const Hero: React.FC<HeroProps> = ({
     setter(formatted);
   };
 
-  const ensureMin = (getter: string, setter: (v: string) => void, min: number) => {
+  const ensureMin = (
+    getter: string,
+    setter: (v: string) => void,
+    min: number,
+  ) => {
     const num = parseInt(getter || "0", 10);
     if (!getter || isNaN(num) || num < min) {
       setter(min.toString());
@@ -86,15 +94,15 @@ export const Hero: React.FC<HeroProps> = ({
 
     setIsCalculating(true);
     setCalculationProgress(0);
-    
+
     // Simulate thinking/scanning for premium effect
     const duration = 1500; // Increased to 1.5s for better feel
-    const interval = 50; 
+    const interval = 50;
     const steps = duration / interval;
     const increment = 100 / steps;
-    
+
     const timer = setInterval(() => {
-      setCalculationProgress(prev => {
+      setCalculationProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
           return 100;
@@ -147,9 +155,12 @@ export const Hero: React.FC<HeroProps> = ({
                   playstyleId={playstyleId}
                   onPlaystyleChange={setPlaystyleId}
                   customXPStr={customXPStr}
-                  onCustomXPChange={(val) => handleLevelChange(setCustomXPStr, val, 200000)}
+                  onCustomXPChange={(val) =>
+                    handleLevelChange(setCustomXPStr, val, 200000)
+                  }
                   onBlur={() => {
-                    if (playstyleId === "custom") ensureMin(customXPStr, setCustomXPStr, 10000);
+                    if (playstyleId === "custom")
+                      ensureMin(customXPStr, setCustomXPStr, 10000);
                     handleCalculate();
                   }}
                   compact={true}
@@ -157,7 +168,8 @@ export const Hero: React.FC<HeroProps> = ({
                 />
                 {playstyleId !== "custom" && (
                   <span className="text-[9px] text-primary/80 font-bold uppercase tracking-widest mt-1.5 ml-1">
-                    ~{(selectedPlaystyle.xp / 1000).toLocaleString()} {t.hero.xpPerMatch}
+                    ~{(selectedPlaystyle.xp / 1000).toLocaleString()}{" "}
+                    {t.hero.xpPerMatch}
                   </span>
                 )}
               </div>
@@ -214,11 +226,19 @@ export const Hero: React.FC<HeroProps> = ({
                 disabled={isCustomXPInvalid || isCalculating}
                 className="group bg-primary hover:bg-primary-hover text-background-dark font-black px-4 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(20,255,0,0.3)] active:translate-y-0 active:shadow-none uppercase text-xs h-[38px] disabled:opacity-30 disabled:cursor-not-allowed relative overflow-hidden"
               >
-                {isCalculating && <div className="absolute inset-0 bg-white/20 animate-scan pointer-events-none" />}
-                <span className={`material-symbols-outlined text-sm transition-transform duration-300 ${isCalculating ? 'animate-spin' : 'group-hover:rotate-180'}`}>
+                {isCalculating && (
+                  <div className="absolute inset-0 bg-white/20 animate-scan pointer-events-none" />
+                )}
+                <span
+                  className={`material-symbols-outlined text-sm transition-transform duration-300 ${isCalculating ? "animate-spin" : "group-hover:rotate-180"}`}
+                >
                   sync
                 </span>
-                {isCalculating ? t.hero.calculating : (isCalculated ? t.hero.update : t.hero.calculate)}
+                {isCalculating
+                  ? t.hero.calculating
+                  : isCalculated
+                    ? t.hero.update
+                    : t.hero.calculate}
               </button>
             </div>
           </div>
@@ -235,10 +255,14 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div className="mb-8 lg:mb-16 relative z-20 max-w-3xl">
         <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black text-white uppercase italic tracking-tighter mb-2 drop-shadow-[0_0_30px_rgba(255,255,0,0.1)] leading-[0.85]">
-          {language === 'en' ? (
-            <>Fortnite <span className="text-primary">XP</span> Calculator</>
+          {language === "en" ? (
+            <>
+              Fortnite <span className="text-primary">XP</span>
+            </>
           ) : (
-            <><span className="text-primary">XP</span> Fortnite</>
+            <>
+              <span className="text-primary">XP</span> Fortnite
+            </>
           )}
         </h1>
         <h2 className="text-primary text-[10px] sm:text-sm lg:text-xl font-black uppercase tracking-widest italic mb-6 lg:mb-8 flex items-center justify-center gap-3 lg:gap-4 leading-none">
@@ -255,13 +279,17 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="absolute -inset-2 sm:-inset-4 border border-primary/5 rounded-3xl sm:rounded-4xl pointer-events-none" />
         <div className="absolute -inset-4 sm:-inset-8 border border-primary/2 rounded-4xl sm:rounded-[3rem] pointer-events-none" />
 
-        <div className={`bg-card-dark border-2 border-border-dark p-6 sm:p-8 lg:p-12 rounded-2xl relative overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] z-10 transition-all duration-500 ${isCalculating ? 'animate-pulse-glow scale-[0.98]' : 'hover:border-primary/10'}`}>
-          
+        <div
+          className={`bg-card-dark border-2 border-border-dark p-6 sm:p-8 lg:p-12 rounded-2xl relative overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] z-10 transition-all duration-500 ${isCalculating ? "animate-pulse-glow scale-[0.98]" : "hover:border-primary/10"}`}
+        >
           {isCalculating && (
             <div className="absolute inset-0 z-50 bg-background-dark/80 backdrop-blur-md flex flex-col items-center justify-center animate-fade-in px-4">
               <div className="w-full max-w-[240px] h-2 bg-border-dark rounded-full overflow-hidden relative mb-4">
                 <div className="absolute inset-0 bg-primary animate-scan opacity-50 shadow-[0_0_15px_rgba(255,255,0,0.5)]" />
-                <div className="h-full bg-primary transition-all duration-75 ease-out shadow-[0_0_10px_rgba(255,255,0,0.5)]" style={{ width: `${calculationProgress}%` }} />
+                <div
+                  className="h-full bg-primary transition-all duration-75 ease-out shadow-[0_0_10px_rgba(255,255,0,0.5)]"
+                  style={{ width: `${calculationProgress}%` }}
+                />
               </div>
               <p className="text-primary font-black uppercase italic tracking-widest text-lg animate-pulse">
                 {t.hero.scanningSeason}
@@ -279,7 +307,9 @@ export const Hero: React.FC<HeroProps> = ({
                 type="text"
                 inputMode="numeric"
                 value={currentLevelStr}
-                onChange={(e) => handleLevelChange(setCurrentLevelStr, e.target.value)}
+                onChange={(e) =>
+                  handleLevelChange(setCurrentLevelStr, e.target.value)
+                }
               />
             </div>
 
@@ -288,14 +318,20 @@ export const Hero: React.FC<HeroProps> = ({
                 <label className="block text-[10px] text-slate-500 font-bold uppercase tracking-widest">
                   {t.hero.levelTarget}
                 </label>
-                {humorMsg && <span className="text-[10px] font-black text-red-500 animate-bounce">{humorMsg}</span>}
+                {humorMsg && (
+                  <span className="text-[10px] font-black text-red-500 animate-bounce">
+                    {humorMsg}
+                  </span>
+                )}
               </div>
               <input
                 className={`w-full bg-background-dark/50 border border-border-dark text-white font-black py-2 sm:py-3 px-4 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-base sm:text-lg lg:text-lg shadow-inner ${targetLevel >= 400 ? "text-red-500 border-red-500/50" : ""}`}
                 type="text"
                 inputMode="numeric"
                 value={targetLevelStr}
-                onChange={(e) => handleLevelChange(setTargetLevelStr, e.target.value)}
+                onChange={(e) =>
+                  handleLevelChange(setTargetLevelStr, e.target.value)
+                }
               />
             </div>
 
@@ -307,7 +343,9 @@ export const Hero: React.FC<HeroProps> = ({
                 playstyleId={playstyleId}
                 onPlaystyleChange={setPlaystyleId}
                 customXPStr={customXPStr}
-                onCustomXPChange={(val) => handleLevelChange(setCustomXPStr, val, 200000)}
+                onCustomXPChange={(val) =>
+                  handleLevelChange(setCustomXPStr, val, 200000)
+                }
                 isInvalid={isCustomXPInvalid}
               />
             </div>
@@ -320,7 +358,9 @@ export const Hero: React.FC<HeroProps> = ({
             onClick={handleCalculateClick}
           >
             <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-[-20deg]" />
-            <span className="material-symbols-outlined text-xl sm:text-3xl group-hover:rotate-12 transition-transform">bolt</span>
+            <span className="material-symbols-outlined text-xl sm:text-3xl group-hover:rotate-12 transition-transform">
+              bolt
+            </span>
             {t.hero.calculate}
           </button>
         </div>

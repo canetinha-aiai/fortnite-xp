@@ -68,15 +68,26 @@ export const Header: React.FC<HeaderProps> = ({ className = "", onReset }) => {
           </button>
         </nav>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          className="md:hidden text-white hover:text-primary transition-colors p-2 -mr-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          <span className="material-symbols-outlined text-3xl">
-            {isMobileMenuOpen ? "close" : "menu"}
-          </span>
-        </button>
+        <div className="flex items-center gap-2">
+          {/* Language Toggle for Mobile (outside menu) */}
+          <button 
+            onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-background-dark border border-border-dark text-[10px] font-black text-slate-400 hover:text-primary hover:border-primary/30 transition-all active:scale-95"
+            aria-label="Switch Language"
+          >
+            {language === 'pt' ? 'EN' : 'PT'}
+          </button>
+
+          {/* Mobile Hamburger Button */}
+          <button
+            className="md:hidden text-white hover:text-primary transition-colors p-2 -mr-1"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <span className="material-symbols-outlined text-3xl">
+              {isMobileMenuOpen ? "close" : "menu"}
+            </span>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Overlay */}
