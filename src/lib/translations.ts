@@ -50,8 +50,8 @@ export const translations = {
     },
     hero: {
       title: "XP Fortnite",
-      subtitle: "Calculadora de Meta",
-      description: "Analise sua progressão e descubra exatamente o XP necessário para completar o seu Passe de Batalha.",
+      subtitle: "Calculadora de XP Fortnite",
+      description: "A melhor calculadora de XP Fortnite. Analise sua progressão e descubra exatamente o XP necessário para completar o seu Passe de Batalha.",
       levelCurrent: "Nível Atual",
       levelTarget: "Nível Alvo",
       playstyle: "Estilo de Jogo",
@@ -214,8 +214,8 @@ export const translations = {
     },
     hero: {
       title: "Fortnite XP",
-      subtitle: "Goal Calculator",
-      description: "Analyze your progression and find out exactly the XP needed to complete your Battle Pass.",
+      subtitle: "Fortnite XP Calculator",
+      description: "Analyze your progression with the best Fortnite XP Calculator and find out exactly the XP needed to complete your Battle Pass.",
       levelCurrent: "Current Level",
       levelTarget: "Target Level",
       playstyle: "Playstyle",

@@ -14,21 +14,24 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || "https://fortnite-xp.vercel.app",
   ),
   title: {
-    default: "XP Fortnite | Fortnite XP Calculator & Níveis",
+    default: "XP Fortnite | Calculadora",
     template: "%s | XP Fortnite",
   },
   alternates: {
     canonical: "/",
   },
   description:
-    "XP Fortnite: Acompanhe e calcule sua progressão de níveis e passos no Passe de Batalha de forma rápida e precisa. Saiba quanto falta para o nível 100 e 200.",
+    "XP Fortnite: A melhor calculadora de XP Fortnite e Battle Pass Tracker. Calcule sua progressão de níveis, descubra quanto falta para o nível 100 e 200, e suba de nível rápido.",
   keywords: [
-    "Fortnite XP Calculator",
     "XP Fortnite",
     "Fortnite XP",
+    "XP Fortnite Calculator",
+    "Fortnite XP Calculator",
+    "Fortnite Calculadora",
+    "Calculadora XP Fortnite",
+    "Fortnite XP Tracker",
     "Fortnite",
     "XP",
-    "Calculadora de XP Fortnite",
     "Passe de Batalha",
     "Battle Pass",
     "Níveis",
@@ -36,7 +39,7 @@ export const metadata: Metadata = {
     "Como subir de nível rápido no fortnite",
     "Quanto de XP falta para o nível 100",
     "Quanto de XP falta para o nível 200",
-    "Fortnite XP Calculator",
+    "Fortnite XP Guide",
   ],
   authors: [{ name: "Fortnite XP Team" }],
   creator: "Fortnite XP",
@@ -53,9 +56,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "XP Fortnite | Calculadora de Progressão",
+    title: "XP Fortnite | Fortnite XP Calculator",
     description:
-      "XP Fortnite: Acompanhe sua progressão de níveis e passos no Passe de Batalha do Fortnite.",
+      "XP Fortnite: A melhor calculadora de XP Fortnite e Battle Pass Tracker. Calcule sua progressão de níveis no Fortnite.",
     url: "/",
     siteName: "XP Fortnite",
     locale: "pt_BR",
@@ -82,10 +85,11 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "XP Fortnite Calculator",
+  "name": "XP Fortnite | Fortnite XP Calculator",
   "operatingSystem": "All",
   "applicationCategory": "ToolApplication",
-  "description": "Calculadora precisa de XP Fortnite para progressão no Passe de Batalha. Saiba quanto XP falta para os níveis 100 e 200.",
+  "description": "Calculadora precisa de XP Fortnite e Battle Pass Tracker. Calcule quanto XP falta para os níveis 100 e 200 no Fortnite.",
+  "keywords": "xp fortnite, fortnite xp, fortnite calculator, fortnite calculadora, xp fortnite calculator",
   "offers": {
     "@type": "Offer",
     "price": "0",

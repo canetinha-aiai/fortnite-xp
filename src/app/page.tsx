@@ -17,7 +17,6 @@ export default function Home() {
     targetLevel,
     playstyleId,
     daysRemaining,
-    seasonEndDate,
     calculated,
     calculate,
     reset,
@@ -28,6 +27,7 @@ export default function Home() {
     <Layout>
       <Header onReset={reset} />
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-6 py-6 md:py-10 lg:px-20 z-10 relative">
+        <h1 className="sr-only">XP Fortnite: Calculadora de Níveis</h1>
         <Hero
           onCalculate={calculate}
           isCalculated={calculated}
