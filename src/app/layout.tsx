@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "XP Fortnite | Fortnite XP Calculator",
+    title: "XP Fortnite | Calculadora",
     description:
       "XP Fortnite: A melhor calculadora de XP Fortnite e Battle Pass Tracker. Calcule sua progressão de níveis no Fortnite.",
     url: "/",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "XP Fortnite | Calculadora de Progressão",
+    title: "XP Fortnite | Calculadora",
     description:
       "XP Fortnite: Acompanhe sua progressão de níveis e passos no Passe de Batalha do Fortnite.",
   },
@@ -85,20 +85,22 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "XP Fortnite | Fortnite XP Calculator",
-  "operatingSystem": "All",
-  "applicationCategory": "ToolApplication",
-  "description": "Calculadora precisa de XP Fortnite e Battle Pass Tracker. Calcule quanto XP falta para os níveis 100 e 200 no Fortnite.",
-  "keywords": "xp fortnite, fortnite xp, fortnite calculator, fortnite calculadora, xp fortnite calculator",
-  "offers": {
+  name: "XP Fortnite | Fortnite XP Calculator",
+  operatingSystem: "All",
+  applicationCategory: "ToolApplication",
+  description:
+    "Calculadora precisa de XP Fortnite e Battle Pass Tracker. Calcule quanto XP falta para os níveis 100 e 200 no Fortnite.",
+  keywords:
+    "xp fortnite, fortnite xp, fortnite calculator, fortnite calculadora, xp fortnite calculator",
+  offers: {
     "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
+    price: "0",
+    priceCurrency: "USD",
   },
-  "author": {
+  author: {
     "@type": "Person",
-    "name": "Fortnite XP Team"
-  }
+    name: "Fortnite XP Team",
+  },
 };
 
 export default function RootLayout({
